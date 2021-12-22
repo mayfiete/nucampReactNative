@@ -1,3 +1,5 @@
+<script src="http://localhost:8097"></script>
+
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
