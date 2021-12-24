@@ -33,7 +33,7 @@ function RenderCampsite(props) {
                 <Text style={{ margin: 10 }}>
                     {campsite.description}
                 </Text>
-                <View style={styles.formRow}
+                <View style={styles.cardRow}
                 >
                     <Icon
                         name={props.favorite ? 'heart' : 'heart-o'}
@@ -88,6 +88,9 @@ class CampsiteInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            rating: 5,
+            author: '',
+            text: '',
             showModal: false
         };
     }
@@ -98,6 +101,20 @@ class CampsiteInfo extends Component {
 
     toggleModal() {
         this.setState({ showModal: !this.state.showModal });
+    }
+
+    handleComment(campsiteId) {
+        console.log(JSON.stringify(this.state));
+        this.toggleModal();
+    };
+
+    resetForm() {
+        this.setState({
+            rating: 5,
+            author: '',
+            text: '',
+            showModal: false
+        });
     }
 
     static navigationOptions = {
