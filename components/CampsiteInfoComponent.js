@@ -120,7 +120,7 @@ class CampsiteInfo extends Component {
     }
 
     handleComment(campsiteId) {
-        postComment(campsiteId); // this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
+        postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
         this.toggleModal();
     };
 
@@ -165,24 +165,24 @@ class CampsiteInfo extends Component {
                             onFinishRating={rating => this.setState({ rating: rating })}
                             style={{ paddingVertical: 10 }}
                         >
-                            <Input
-                                placeholder='Author'
-                                leftIcon={{ type: 'font-awesome', name: 'user-o' }}
-                                leftIconContainerStyle={{ paddingRight: 10 }}
-                                onChangeText={author => this.setState({ author: author })}
-                                value={this.state.author}
-                            >
-
-                            </Input>
-                            <Input
-                                leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
-                                leftIconContainerStyle={{ paddingRight: 10 }}
-                                onChangeText={comment => this.setState({ comment: comment })}
-                                value={this.state.comment}
-                            >
-                            </Input>
-
                         </Rating>
+                        <Input
+                            placeholder='Author'
+                            leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                            leftIconContainerStyle={{ paddingRight: 10 }}
+                            onChangeText={author => this.setState({ author: author })}
+                            value={this.state.author}
+                        >
+                        </Input>
+                        <Input
+                            leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
+                            leftIconContainerStyle={{ paddingRight: 10 }}
+                            onChangeText={comment => this.setState({ comment: comment })}
+                            value={this.state.comment}
+                        >
+                        </Input>
+
+
                         <View >
                             <Button
                                 title='Submit'
