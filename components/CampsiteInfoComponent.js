@@ -35,7 +35,6 @@ function RenderCampsite(props) {
                 </Text>
                 <View style={styles.formRow}
                 >
-
                     <Icon
                         name={props.favorite ? 'heart' : 'heart-o'}
                         type='font-awesome'
@@ -104,6 +103,7 @@ class CampsiteInfo extends Component {
     static navigationOptions = {
         title: 'Campsite Information'
     }
+
 
     render() {
         const campsiteId = this.props.navigation.getParam('campsiteId');
