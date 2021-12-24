@@ -19,11 +19,9 @@ const mapDispatchToProps = {
     postFavorite: campsiteId => (postFavorite(campsiteId))
 };
 
-
 function RenderCampsite(props) {
 
     const { campsite } = props;
-
 
     if (campsite) {
         return (
@@ -35,7 +33,9 @@ function RenderCampsite(props) {
                 <Text style={{ margin: 10 }}>
                     {campsite.description}
                 </Text>
-                <View style={styles.formRow}>
+                <View style={styles.formRow}
+                >
+
                     <Icon
                         name={props.favorite ? 'heart' : 'heart-o'}
                         type='font-awesome'
@@ -54,6 +54,7 @@ function RenderCampsite(props) {
                         onPress={() => props.onShowModal()}
                     />
                 </View>
+
             </Card >
         );
     }
