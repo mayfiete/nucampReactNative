@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite } from '../redux/ActionCreators';
 import { postComment } from '../redux/ActionCreators';
-//import { addComment } from '../redux/ActionCreators';
 import { Rating, Input } from 'react-native-elements';
 
 
