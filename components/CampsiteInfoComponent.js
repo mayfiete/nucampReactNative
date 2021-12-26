@@ -120,20 +120,22 @@ class CampsiteInfo extends Component {
         this.setState({ showModal: !this.state.showModal });
     }
 
+    resetForm() {
+        this.setState({
+            rating: 5,
+            text: '',
+            author: '',
+            showModal: false
+        });
+    }
+
     handleComment(campsiteId) {
         postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
         this.resetForm();
         this.toggleModal();
     };
 
-    resetForm() {
-        this.setState({
-            rating: 5,
-            author: '',
-            text: '',
-            showModal: false
-        });
-    }
+
 
     static navigationOptions = {
         title: 'Campsite Information'
@@ -160,53 +162,55 @@ class CampsiteInfo extends Component {
                     onRequestClose={() => this.toggleModal()}
                 >
                     <View style={styles.modal}>
-                        <Rating
-                            showRating
-                            startingValue={this.state.rating}
-                            imageSize={40}
-                            onFinishRating={rating => this.setState({ rating: rating })}
-                            style={{ paddingVertical: 10 }}
-                        >
-                        </Rating>
-                        <Input
-                            placeholder='Author'
-                            leftIcon={{ type: 'font-awesome', name: 'user-o' }}
-                            leftIconContainerStyle={{ paddingRight: 10 }}
-                            onChangeText={author => this.setState({ author: author })}
-                            value={this.state.author}
-                        >
-                        </Input>
-                        <Input
-                            leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
-                            leftIconContainerStyle={{ paddingRight: 10 }}
-                            onChangeText={comment => this.setState({ comment: comment })}
-                            value={this.state.comment}
-                        >
-                        </Input>
-                    </View>
+                        <View >
+                            <Rating
+                                showRating
+                                startingValue={this.state.rating}
+                                imageSize={40}
+                                onFinishRating={rating => this.setState({ rating: rating })}
+                                style={{ paddingVertical: 10 }}
+                            >
+                            </Rating>
+                            <Input
+                                placeholder='Author'
+                                leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                                leftIconContainerStyle={{ paddingRight: 10 }}
+                                onChangeText={author => this.setState({ author: author })}
+                                value={this.state.author}
+                            >
+                            </Input>
+                            <Input
+                                leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
+                                leftIconContainerStyle={{ paddingRight: 10 }}
+                                onChangeText={comment => this.setState({ comment: comment })}
+                                value={this.state.comment}
+                            >
+                            </Input>
+                        </View>
 
-
-                    <View >
-                        <Button
-                            title='Submit'
-                            style={styles.modalButtonSubmit}
-                            onPress={() => {
-                                this.handleComment(campsiteId);
-                                this.resetForm();
-                            }}
-                        />
-                    </View>
-                    <View style={{ margin: 10 }}>
-                        <Button
-                            title='Cancel'
-                            style={styles.modalButtonCancel}
-                            OnPress={() => {
-                                this.toggleModal();
-                                this.resetForm();
-                            }}
-
-                        >
-                        </Button>
+                        <View >
+                            <Button
+                                title='Submit'
+                                color='#5637DD'
+                                width={100}
+                                onPress={() => {
+                                    this.handleComment(campsiteId);
+                                    this.resetForm();
+                                }}
+                            />
+                        </View>
+                        <View style={{ margin: 10 }}>
+                            <Button
+                                title='Cancel'
+                                color='#808080'
+                                width={100}
+                                onPress={() => {
+                                    this.toggleModal();
+                                    this.resetForm();
+                                }}
+                            >
+                            </Button>
+                        </View>
                     </View>
                 </Modal>
             </ScrollView >
@@ -220,19 +224,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
         flexDirection: 'row',
-        margin: 20,
-        color: '#5637DD'
+        margin: 20
     },
     modal: {
         justifyContent: 'center',
         margin: 20
 
-    },
-    modalButtonSubmit: {
-        color: '#5637DD'
-    },
-    modalButtonCancel: {
-        color: 'grey'
     }
 });
 
