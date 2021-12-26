@@ -15,7 +15,7 @@ export const comments = (state = { errMess: null, comments: [] }, action) => {
                 id: uniqueId,
                 comment: comment
             };
-            return { ...state, errMess: null, comments: newComment };
+            return { ...state, errMess: null, comment: newComment };
 
 
 

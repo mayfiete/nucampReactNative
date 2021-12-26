@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite } from '../redux/ActionCreators';
 import { postComment } from '../redux/ActionCreators';
+//import { addComment } from '../redux/ActionCreators';
 import { Rating, Input } from 'react-native-elements';
 
 
@@ -21,6 +22,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     postFavorite: campsiteId => (postFavorite(campsiteId)),
     postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
+    // addComment: (campsiteId, rating, author, text) => (addComment(campsiteId, rating, author, text))
 };
 
 function RenderCampsite(props) {
@@ -123,16 +125,16 @@ class CampsiteInfo extends Component {
     resetForm() {
         this.setState({
             rating: 5,
-            text: '',
             author: '',
+            text: '',
             showModal: false
         });
-    }
+    };
 
     handleComment(campsiteId) {
         postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
+        console.log(campsiteId, this.state.rating, this.state.author, this.state.text, 'hello');
         this.resetForm();
-        this.toggleModal();
     };
 
 
@@ -159,7 +161,10 @@ class CampsiteInfo extends Component {
                     animationType={'slide'}
                     transparent={false}
                     visible={this.state.showModal}
-                    onRequestClose={() => this.toggleModal()}
+                    onRequestClose={() => {
+                        this.resetForm()
+                        this.toggleModal();
+                    }}
                 >
                     <View style={styles.modal}>
                         <View >
@@ -192,10 +197,10 @@ class CampsiteInfo extends Component {
                             <Button
                                 title='Submit'
                                 color='#5637DD'
-                                width={100}
                                 onPress={() => {
                                     this.handleComment(campsiteId);
                                     this.resetForm();
+                                    alert('Comment Submitted');
                                 }}
                             />
                         </View>
@@ -203,7 +208,6 @@ class CampsiteInfo extends Component {
                             <Button
                                 title='Cancel'
                                 color='#808080'
-                                width={100}
                                 onPress={() => {
                                     this.toggleModal();
                                     this.resetForm();
@@ -233,4 +237,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CampsiteInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(CampsiteInfo, { postComment });
