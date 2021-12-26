@@ -21,8 +21,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     postFavorite: campsiteId => (postFavorite(campsiteId)),
-    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
-    // addComment: (campsiteId, rating, author, text) => (addComment(campsiteId, rating, author, text))
+    postComment: (campsiteId, rating, author, comment) => (postComment(campsiteId, rating, author, comment))
+    // addComment: (campsiteId, rating, author, comment) => (addComment(campsiteId, rating, author, comment))
 };
 
 function RenderCampsite(props) {
@@ -109,7 +109,7 @@ class CampsiteInfo extends Component {
         this.state = {
             rating: 5,
             author: '',
-            text: '',
+            comment: '',
             showModal: false
         };
     }
@@ -126,14 +126,14 @@ class CampsiteInfo extends Component {
         this.setState({
             rating: 5,
             author: '',
-            text: '',
+            comment: '',
             showModal: false
         });
     };
 
     handleComment(campsiteId) {
-        postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
-        console.log(campsiteId, this.state.rating, this.state.author, this.state.text, 'hello');
+        postComment(campsiteId, this.state.rating, this.state.author, this.state.comment);
+        console.log(campsiteId, this.state.rating, this.state.author, this.state.comment, 'hello');
         this.resetForm();
     };
 
@@ -185,6 +185,7 @@ class CampsiteInfo extends Component {
                             >
                             </Input>
                             <Input
+                                placeholder='Comment'
                                 leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
                                 leftIconContainerStyle={{ paddingRight: 10 }}
                                 onChangeText={comment => this.setState({ comment: comment })}
