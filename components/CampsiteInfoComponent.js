@@ -133,7 +133,7 @@ class CampsiteInfo extends Component {
 
     handleComment(campsiteId) {
         postComment(campsiteId, this.state.rating, this.state.author, this.state.comment);
-        console.log(campsiteId, this.state.rating, this.state.author, this.state.comment, 'hello');
+        console.log(campsiteId, this.state.rating, this.state.author, this.state.comment, 'test');
         this.resetForm();
     };
 
@@ -238,4 +238,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CampsiteInfo, { postComment });
+export default connect(mapStateToProps, mapDispatchToProps)(CampsiteInfo);
