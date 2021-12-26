@@ -153,13 +153,13 @@ export const addFavorite = campsiteId => ({
     payload: campsiteId
 });
 
-export const postComment = (campsiteId, rating, author, comment) => (dispatch) => {
+export const postComment = (campsiteId, rating, author, text) => (dispatch) => {
 
     const newComment = {
         campsiteId,
         rating,
         author,
-        comment
+        text
     };
     newComment.date = new Date().toISOString();
     setTimeout(() => {

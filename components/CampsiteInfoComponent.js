@@ -21,7 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     postFavorite: campsiteId => (postFavorite(campsiteId)),
-    postComment: (campsiteId, rating, author, comment) => (postComment(campsiteId, rating, author, comment))
+    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
 };
 
 function RenderCampsite(props) {
@@ -108,7 +108,7 @@ class CampsiteInfo extends Component {
         this.state = {
             rating: 5,
             author: '',
-            comment: '',
+            text: '',
             showModal: false
         };
     }
@@ -125,14 +125,14 @@ class CampsiteInfo extends Component {
         this.setState({
             rating: 5,
             author: '',
-            comment: '',
+            text: '',
             showModal: false
         });
     };
 
     handleComment(campsiteId) {
-        postComment(campsiteId, this.state.rating, this.state.author, this.state.comment);
-        console.log(campsiteId, this.state.rating, this.state.author, this.state.comment, 'test');
+        postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
+        console.log(campsiteId, this.state.rating, this.state.author, this.state.text, 'test');
         this.resetForm();
     };
 
@@ -187,8 +187,8 @@ class CampsiteInfo extends Component {
                                 placeholder='Comment'
                                 leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
                                 leftIconContainerStyle={{ paddingRight: 10 }}
-                                onChangeText={comment => this.setState({ comment: comment })}
-                                value={this.state.comment}
+                                onChangeText={text => this.setState({ text: text })}
+                                value={this.state.text}
                             >
                             </Input>
                         </View>
