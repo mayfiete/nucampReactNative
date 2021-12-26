@@ -9,6 +9,7 @@ import { postFavorite } from '../redux/ActionCreators';
 import { postComment } from '../redux/ActionCreators';
 import { Rating, Input } from 'react-native-elements';
 
+
 const mapStateToProps = state => {
     return {
         campsites: state.campsites,
@@ -121,6 +122,7 @@ class CampsiteInfo extends Component {
 
     handleComment(campsiteId) {
         postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
+        this.resetForm();
         this.toggleModal();
     };
 
@@ -181,33 +183,30 @@ class CampsiteInfo extends Component {
                             value={this.state.comment}
                         >
                         </Input>
+                    </View>
 
 
-                        <View >
-                            <Button
-                                title='Submit'
-                                style={
-                                    color = '#5637DD'
-                                }
-                                onPress={() => {
-                                    this.handleComment(campsiteId);
-                                    this.resetForm();
-                                }}
-                            />
-                        </View>
-                        <View style={{ margin: 10 }}>
-                            <Button
-                                OnPress={() => {
-                                    this.toggleModal();
-                                    this.resetForm();
-                                }}
-                                title='Cancel'
-                                style={
-                                    color = '#808080'
-                                }
-                            >
-                            </Button>
-                        </View>
+                    <View >
+                        <Button
+                            title='Submit'
+                            style={styles.modalButtonSubmit}
+                            onPress={() => {
+                                this.handleComment(campsiteId);
+                                this.resetForm();
+                            }}
+                        />
+                    </View>
+                    <View style={{ margin: 10 }}>
+                        <Button
+                            title='Cancel'
+                            style={styles.modalButtonCancel}
+                            OnPress={() => {
+                                this.toggleModal();
+                                this.resetForm();
+                            }}
+
+                        >
+                        </Button>
                     </View>
                 </Modal>
             </ScrollView >
@@ -221,11 +220,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
         flexDirection: 'row',
-        margin: 20
+        margin: 20,
+        color: '#5637DD'
     },
     modal: {
         justifyContent: 'center',
         margin: 20
+
+    },
+    modalButtonSubmit: {
+        color: '#5637DD'
+    },
+    modalButtonCancel: {
+        color: 'grey'
     }
 });
 
