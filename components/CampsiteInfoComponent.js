@@ -19,8 +19,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+    /*
     postFavorite: campsiteId => (postFavorite(campsiteId)),
     postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
+    */
+    postFavorite,
+    postComment
 };
 
 function RenderCampsite(props) {
@@ -130,7 +134,7 @@ class CampsiteInfo extends Component {
     };
 
     handleComment(campsiteId) {
-        postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
+        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
         console.log(campsiteId, this.state.rating, this.state.author, this.state.text, 'test');
         this.resetForm();
     };
@@ -146,6 +150,7 @@ class CampsiteInfo extends Component {
         const campsiteId = this.props.navigation.getParam('campsiteId');
         const campsite = this.props.campsites.campsites.filter(campsite => campsite.id === campsiteId)[0];
         const comments = this.props.comments.comments.filter(comment => comment.campsiteId === campsiteId);
+
         return (
             <ScrollView>
                 <RenderCampsite campsite={campsite}
@@ -178,7 +183,7 @@ class CampsiteInfo extends Component {
                                 placeholder='Author'
                                 leftIcon={{ type: 'font-awesome', name: 'user-o' }}
                                 leftIconContainerStyle={{ paddingRight: 10 }}
-                                onChangeText={author => this.setState({ author: author })}
+                                onChangeText={(author) => this.setState({ author: author })}
                                 value={this.state.author}
                             >
                             </Input>
@@ -186,7 +191,7 @@ class CampsiteInfo extends Component {
                                 placeholder='Comment'
                                 leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
                                 leftIconContainerStyle={{ paddingRight: 10 }}
-                                onChangeText={text => this.setState({ text: text })}
+                                onChangeText={(text) => this.setState({ text: text })}
                                 value={this.state.text}
                             >
                             </Input>
