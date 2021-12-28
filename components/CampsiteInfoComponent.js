@@ -197,7 +197,7 @@ class CampsiteInfo extends Component {
                             </Input>
                         </View>
 
-                        <View >
+                        <View style={{ margin: 10 }}>
                             <Button
                                 title='Submit'
                                 color='#5637DD'
