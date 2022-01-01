@@ -76,6 +76,7 @@ function RenderComments({ comments }) {
             <View style={{ margin: 10 }}>
                 <Text style={{ fontSize: 14 }}>{item.text}</Text>
                 <Rating
+                    readonly
                     style={{
                         fontSize: 12,
                         alignItems: 'flex-start',
@@ -83,12 +84,10 @@ function RenderComments({ comments }) {
                         readonly: true
 
                     }}
-                    startValue={item.rating}
+                    startingValue={item.rating}
                     imageSize={10}
 
-                >
-                    {item.rating} Stars
-                </Rating>
+                />
                 <Text style={{ fontSize: 12 }}>{`-- ${item.author}, ${item.date}`}</Text>
             </View>
         );
