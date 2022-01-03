@@ -66,8 +66,9 @@ function RenderCampsite(props) {
                 )
             }
             else if (recognizeComment(gestureState)) {
-                props.toggleModal();
+                props.onShowModal();
             }
+            return true;
         }
     });
 
