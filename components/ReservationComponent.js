@@ -23,15 +23,6 @@ class Reservation extends Component {
         title: 'Reserve Campsite'
     }
 
-    resetForm() {
-        this.setState({
-            campers: 1,
-            hikeIn: false,
-            date: new Date(),
-            showCalendar: false,
-        });
-    }
-
 
     handleReservation() {
 
@@ -55,6 +46,15 @@ class Reservation extends Component {
             ],
             { cancelable: false }
         );
+    }
+
+    resetForm() {
+        this.setState({
+            campers: 1,
+            hikeIn: false,
+            date: new Date(),
+            showCalendar: false,
+        });
     }
 
 
