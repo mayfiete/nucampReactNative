@@ -6,8 +6,8 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { baseUrl } from '../shared/baseUrl';
-import { ImageManipulator } from 'expo-image-manipulator';
-import { setAutoServerRegistrationEnabledAsync } from 'expo-notifications';
+import * as ImageManipulator from 'expo-image-manipulator';
+//import { setAutoServerRegistrationEnabledAsync } from 'expo-notifications';
 
 class LoginTab extends Component {
 
@@ -166,15 +166,15 @@ class RegisterTab extends Component {
         }
     }
 
-    processImage = async () => {
+    processImage = async (imgUri) => {
         const processedImage = await ImageManipulator.manipulateAsync(
-            this.state.imgUri,
+            imgUri,
             [{ resize: { width: 400 } }],
-            { compress: 1, format: SaveFormat.PNG }
+            { format: ImageManipulator.SaveFormat.PNG }
         );
-        setImage(processedImage); // this is the image you want to upload
+        //this.setImage(processedImage); 
         console.log(processedImage);
-        this.setState({ imgUri: processedImage.uri });
+        this.setState({ imageUrl: processedImage.uri }); // imageUrl?
     }
 
 
