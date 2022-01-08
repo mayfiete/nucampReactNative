@@ -173,15 +173,9 @@ class RegisterTab extends Component {
             { compress: 1, format: SaveFormat.PNG }
         );
         setImage(processedImage); // this is the image you want to upload
-        console.log(processedImage); 
-        this.setState({ imgUri: processedImage.uri }); 
-
-
-
-        return processedImage.uri;
+        console.log(processedImage);
+        this.setState({ imgUri: processedImage.uri });
     }
-
-
 
 
     handleRegister() {
@@ -194,6 +188,23 @@ class RegisterTab extends Component {
             SecureStore.deleteItemAsync('userinfo').catch(
                 error => console.log('Could not delete user info', error)
             );
+        }
+    }
+
+
+    getImageFromGallery = async () => {
+        const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+        const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+        if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
+            const capturedImage = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [1, 1]
+            });
+            if (!capturedImage.cancelled) {
+                console.log(capturedImage);
+                this.processImage(capturedImage.uri);
+            }
         }
     }
 
@@ -212,6 +223,10 @@ class RegisterTab extends Component {
                         <Button
                             title='Camera'
                             onPress={this.getImageFromCamera}
+                        />
+                        <Button
+                            title='Gallery'
+                            onPress={this.getImageFromGallery}
                         />
                     </View>
                     <Input
