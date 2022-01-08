@@ -6,6 +6,8 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { baseUrl } from '../shared/baseUrl';
+import { ImageManipulator } from 'expo-image-manipulator';
+import { setAutoServerRegistrationEnabledAsync } from 'expo-notifications';
 
 class LoginTab extends Component {
 
@@ -159,10 +161,28 @@ class RegisterTab extends Component {
             });
             if (!capturedImage.cancelled) {
                 console.log(capturedImage);
-                this.setState({ imageUrl: capturedImage.uri });
+                this.processImage(capturedImage.uri);
             }
         }
     }
+
+    processImage = async () => {
+        const processedImage = await ImageManipulator.manipulateAsync(
+            this.state.imgUri,
+            [{ resize: { width: 400 } }],
+            { compress: 1, format: SaveFormat.PNG }
+        );
+        setImage(processedImage); // this is the image you want to upload
+        console.log(processedImage); 
+        this.setState({ imgUri: processedImage.uri }); 
+
+
+
+        return processedImage.uri;
+    }
+
+
+
 
     handleRegister() {
         console.log(JSON.stringify(this.state));
@@ -176,6 +196,8 @@ class RegisterTab extends Component {
             );
         }
     }
+
+
 
     render() {
         return (
